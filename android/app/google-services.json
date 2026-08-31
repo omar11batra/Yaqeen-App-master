@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285532354738",
+    "project_id": "mosoaty-bcd16",
+    "storage_bucket": "mosoaty-bcd16.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285532354738:android:833625cf643d685150b1ab",
+        "android_client_info": {
+          "package_name": "com.yaqin.yaqin_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOeLcl-vEWyp1n-002ixPKYt8zdgrrgX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

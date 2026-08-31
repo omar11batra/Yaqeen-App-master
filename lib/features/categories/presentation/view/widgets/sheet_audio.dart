@@ -1,0 +1,241 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:quran_app/core/components/card_widget.dart';
+import 'package:quran_app/core/extensions/theme_extensions.dart';
+import 'package:quran_app/core/failure/request_state.dart';
+import 'package:quran_app/core/services/download_service.dart';
+import 'package:quran_app/core/services/service_locator.dart';
+import 'package:quran_app/core/util/my_extensions.dart';
+import 'package:quran_app/core/widgets/audio/action_progress.dart';
+import 'package:quran_app/core/widgets/audio/custom_progress.dart';
+import 'package:quran_app/core/widgets/auto_text.dart';
+import 'package:quran_app/features/audios/data/remote/base_audio_repository_imp.dart';
+import 'package:quran_app/features/audios/presentation/bloc/base_audio_bloc.dart';
+import 'package:quran_app/features/categories/data/model/category_video_model.dart';
+
+class SheetAudios extends StatelessWidget {
+  const SheetAudios({required this.baseData, super.key});
+  final CategoryDetailModel baseData;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.getHight(70),
+      child: BlocProvider(
+        create: (context) => BaseAudioBloc(
+          repositoryImpl: sl.get<BaseAudioRepositoryImpl>(),
+        )..add(BaseAudioDetailEvent(baseData.apiUrl ?? '')),
+        child: BlocBuilder<BaseAudioBloc, BaseAudioState>(
+          builder: (context, state) {
+            switch (state.famousBaseAudioState) {
+              case RequestState.initial:
+                return const Center(child: CircularProgressIndicator());
+              case RequestState.loading:
+                return const Center(child: CircularProgressIndicator());
+
+              case RequestState.error:
+                return const Center(
+                  child: CircularProgressIndicator(color: Colors.red),
+                );
+
+              case RequestState.success:
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: baseData.title.toString().autoSize(
+                            context,
+                            fontSize: 20,
+                            maxLines: 2,
+                            minFontSize: 10,
+                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: baseData.description.toString().autoSize(
+                            context,
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                    ),
+                    const SizedBox(height: 10),
+                    Divider(
+                      color: context.primaryColor,
+                    ),
+                    ProgressAudio(
+                      audioPlayer: state.audioPlayer ?? AudioPlayer(),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: state.baseAudioDetail.length,
+                        itemBuilder: (context, index) {
+                          final data = state.baseAudioDetail[index];
+                          return _ItemDownloaded(
+                            audioPlayer: state.audioPlayer,
+                            current: index,
+                            data: data,
+                            baseData: baseData,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _ItemDownloaded extends StatelessWidget {
+  _ItemDownloaded({
+    required this.current,
+    required this.baseData,
+    super.key,
+    this.data,
+    this.audioPlayer,
+  });
+  dynamic data;
+  CategoryDetailModel baseData;
+  int current;
+  AudioPlayer? audioPlayer;
+  @override
+  Widget build(BuildContext context) {
+    // logger.d(data);
+    return CardWidget(
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      // shapeType: CardShapeType.circle,
+      child: Column(
+        children: [
+          if (data['description'] != null)
+            Column(
+              children: [
+                data['description'].toString().autoSize(context, maxLines: 5),
+                const SizedBox(height: 10),
+                const Divider(),
+              ],
+            ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: BlocBuilder<BaseAudioBloc, BaseAudioState>(
+                  builder: (context, state) {
+                    switch (state.audioState) {
+                      case RequestState.initial:
+                        return const CircularProgressIndicator();
+                      case RequestState.loading:
+                        return const CircularProgressIndicator();
+
+                      case RequestState.error:
+                        return const CircularProgressIndicator(
+                          color: Colors.red,
+                        );
+
+                      case RequestState.success:
+                        return Container(
+                          height: context.getHight(6),
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: context.primaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ActionProgress(
+                            onPressed: () {
+                              context
+                                  .read<BaseAudioBloc>()
+                                  .add(SetStateEvent());
+                            },
+                            audioPlayer: audioPlayer!,
+                            currentIndex: audioPlayer!.currentIndex!,
+                            itemIndex: current,
+                          ),
+                        );
+                    }
+                  },
+                ),
+              ),
+              _BtnDownload(data: data),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BtnDownload extends StatefulWidget {
+  const _BtnDownload({
+    required this.data,
+  });
+
+  final dynamic data;
+
+  @override
+  State<_BtnDownload> createState() => _BtnDownloadState();
+}
+
+class _BtnDownloadState extends State<_BtnDownload> {
+  DownloadService downloadService = DownloadService();
+  @override
+  void initState() {
+    super.initState();
+    downloadService.init();
+  }
+
+  @override
+  void dispose() {
+    downloadService.remove();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          final url = widget.data['url'];
+          final description = widget.data['description'];
+          downloadService.download(
+            url as String,
+            description as String,
+          );
+        },
+        child: Container(
+          height: context.getHight(6),
+          decoration: BoxDecoration(
+            color: context.primaryColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: widget.data['size'].toString().autoSize(context),
+              ),
+              Container(
+                height: double.infinity,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: context.primaryColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    bottomLeft: Radius.circular(8),
+                  ),
+                ),
+                child: const Icon(
+                  Icons.download,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

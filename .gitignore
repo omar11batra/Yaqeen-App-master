@@ -1,0 +1,68 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio / Gradle / Signing related
+/android/app/debug
+/android/app/profile
+/android/app/release
+.gradle/
+**/android/.gradle/
+**/android/.kotlin/
+*.keystore
+*.jks
+key.properties
+**/android/key.properties
+local.properties
+**/android/local.properties
+
+# iOS / macOS related
+**/Pods/
+**/.symlinks/
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+**/default.mode1v3
+**/default.mode2v3
+**/default.pbxuser
+**/default.perspectivev3
+!/ios/Runner.xcworkspace/contents.xcworkspacedata
+
+# Windows / OS related
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

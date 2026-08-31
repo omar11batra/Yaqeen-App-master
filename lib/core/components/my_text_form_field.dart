@@ -1,0 +1,336 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:quran_app/core/extensions/theme_extensions.dart';
+import 'package:quran_app/core/shared/export/export-shared.dart';
+
+class MyTextFormFieldWidget extends StatefulWidget {
+  MyTextFormFieldWidget({
+    super.key,
+    this.hintText,
+    this.labelText,
+    this.textAlign = TextAlign.start,
+    this.keyboardType,
+    this.suffixIcon,
+    this.height,
+    this.onChanged,
+    this.readOnly,
+    this.controller,
+    this.messageValidate,
+    this.validator,
+    this.prefixIcon,
+    this.maxLines,
+    this.focusNode,
+    this.obscureText = false,
+    this.errorText,
+    this.successText,
+    this.statusText = false,
+    this.onTap,
+    this.onEditingComplete,
+    this.outlineFocusedBorderColor,
+    this.inputFormatters,
+    this.hintStyle,
+    //formatter
+    this.numberFormatter = false,
+    this.noSpaceFormatter = false,
+    this.oneWordArabicFormatter = false,
+    this.arabicFormatter = false,
+    this.threeWordArabicFormatter = false,
+    this.denyArabicFormatter = false,
+    this.englishFormatter = false,
+    this.oneLengthNumberFormatter = false,
+    this.emailFormatter = false,
+    this.phoneFormatter = false,
+    this.numberWithEnglishFormatter = false,
+    this.numberCountFormatter = false,
+    this.numberCountIntFormatter = 1,
+    this.onFieldSubmitted,
+    this.style,
+    this.suffixText,
+    this.prefixText,
+    this.initialValue,
+  });
+  String? hintText;
+  String? Function(String?)? validator;
+  String? labelText;
+  String? messageValidate;
+  double? height;
+  TextEditingController? controller;
+  TextAlign? textAlign;
+  Widget? suffixIcon;
+  Widget? prefixIcon;
+  bool? readOnly;
+  int? maxLines;
+  bool obscureText;
+  TextInputType? keyboardType;
+  FocusNode? focusNode;
+  Color? outlineFocusedBorderColor;
+  final Function(String text)? onChanged;
+  String? errorText;
+  String? successText;
+  final bool statusText;
+  List<TextInputFormatter>? inputFormatters;
+  final bool noSpaceFormatter;
+  final bool numberFormatter;
+  final bool denyArabicFormatter;
+  final bool oneWordArabicFormatter;
+  final bool arabicFormatter;
+  final bool threeWordArabicFormatter;
+  final bool englishFormatter;
+  final bool oneLengthNumberFormatter;
+  final bool phoneFormatter;
+  final bool emailFormatter;
+  final bool numberWithEnglishFormatter;
+  final bool numberCountFormatter;
+  final int numberCountIntFormatter;
+  Function()? onEditingComplete;
+  final void Function()? onTap;
+  final TextStyle? hintStyle;
+  TextStyle? style;
+  void Function(String)? onFieldSubmitted;
+  final String? suffixText;
+  final String? prefixText;
+  final String? initialValue;
+  @override
+  State<MyTextFormFieldWidget> createState() => _MyTextFormFieldWidgetState();
+}
+
+class _MyTextFormFieldWidgetState extends State<MyTextFormFieldWidget> {
+  @override
+  void initState() {
+    try {
+      widget.controller?.selection = TextSelection.fromPosition(
+        TextPosition(offset: widget.controller!.text.length),
+      );
+    } catch (e) {
+      // logger.e('error selection controller $e  ');
+    }
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+      child: TextFormField(
+        inputFormatters: [
+          if (widget.numberFormatter)
+            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+          if (widget.oneLengthNumberFormatter)
+            LengthLimitingTextInputFormatter(1),
+          if (widget.numberCountFormatter)
+            LengthLimitingTextInputFormatter(widget.numberCountIntFormatter),
+          if (widget.noSpaceFormatter) NoSpaceFormatter(),
+          if (widget.arabicFormatter)
+            FilteringTextInputFormatter.allow(RegExp(r'[\u0600-\u06FF\s]')),
+          if (widget.englishFormatter)
+            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
+          if (widget.phoneFormatter)
+            FilteringTextInputFormatter.allow(RegExp('[0-9+]')),
+          if (widget.numberWithEnglishFormatter)
+            FilteringTextInputFormatter.allow(RegExp('[0-9a-zA-Z]')),
+          if (widget.emailFormatter)
+            FilteringTextInputFormatter.allow(
+              RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+'),
+            ),
+          if (widget.threeWordArabicFormatter) _ThreeWordsInputFormatter(),
+          if (widget.oneWordArabicFormatter) _OneWordsInputFormatter(),
+          if (widget.denyArabicFormatter)
+            FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF]+')),
+        ],
+        // style: titleMedium(context)
+        //     .copyWith(fontSize: 16, color: Colors.black),
+        readOnly: widget.readOnly ?? false,
+        validator: widget.validator ??
+            (value) {
+              if (value!.isEmpty) {
+                return widget.messageValidate ?? 'هذا الحقل مطلوب';
+              }
+              return null;
+            },
+
+        onFieldSubmitted: widget.onFieldSubmitted,
+        controller: widget.controller,
+        keyboardType: widget.keyboardType,
+        textAlign: widget.textAlign!,
+        maxLines: widget.maxLines,
+        initialValue: widget.initialValue,
+        obscureText: widget.obscureText,
+        onEditingComplete: widget.onEditingComplete,
+        onSaved: (newValue) {
+          FocusScope.of(context).unfocus();
+        },
+        onTapOutside: (event) {
+          FocusScope.of(context).unfocus();
+          if (widget.onEditingComplete != null) {
+            widget.onEditingComplete?.call();
+          }
+        },
+        onTap: widget.onTap,
+        style: widget.style ??
+            titleSmall(context).copyWith(
+              color: context.primaryColor,
+            ),
+        decoration: InputDecoration(
+          suffixText: widget.suffixText,
+          prefixText: widget.prefixText,
+          fillColor: context.scaffoldBackgroundColor,
+          filled: true,
+          errorText: widget.statusText ? widget.successText : widget.errorText,
+          labelText: widget.labelText ?? widget.hintText,
+          labelStyle: widget.hintStyle,
+          hintText: widget.hintText,
+          helperStyle: Theme.of(context).textTheme.headlineSmall,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: context.primaryColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: context.primaryColor,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: widget.statusText ? Colors.green : Colors.red,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: widget.statusText ? Colors.green : Colors.red,
+            ),
+          ),
+          errorStyle: TextStyle(
+            color: widget.statusText ? Colors.green : Colors.red,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            // fontFamily: AssetsArFonts.medium,
+          ),
+        ),
+        onChanged: widget.onChanged,
+      ),
+    );
+  }
+}
+
+class NoSpaceFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    return TextEditingValue(
+      text: newValue.text.replaceAll(' ', ''),
+      selection: newValue.selection,
+    );
+  }
+}
+
+class _ThreeWordsInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var trimmedText = newValue.text.replaceAll(RegExp(r'\s+'), ' ');
+    var words = trimmedText.split(' ');
+
+    if (words.length > 3) {
+      // Remove extra words
+      words = words.sublist(0, 3);
+      trimmedText = words.join(' ');
+    }
+
+    // Keep the selection at the end of the text
+    final selectionIndex = newValue.selection.end;
+    final newSelectionIndex =
+        selectionIndex - (newValue.text.length - trimmedText.length);
+
+    return TextEditingValue(
+      text: trimmedText,
+      selection: TextSelection.collapsed(offset: newSelectionIndex),
+    );
+  }
+}
+
+class _OneWordsInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var trimmedText = newValue.text.replaceAll(RegExp(r'\s+'), ' ');
+    var words = trimmedText.split(' ');
+
+    if (words.length > 1) {
+      // Remove extra words
+      words = words.sublist(0, 1);
+      trimmedText = words.join(' ');
+    }
+
+    // Keep the selection at the end of the text
+    final selectionIndex = newValue.selection.end;
+    final newSelectionIndex =
+        selectionIndex - (newValue.text.length - trimmedText.length);
+
+    return TextEditingValue(
+      text: trimmedText,
+      selection: TextSelection.collapsed(offset: newSelectionIndex),
+    );
+  }
+}
+
+//------------------------------------------------phone number------------------------------
+
+// class IntlPhoneFieldCustom extends StatelessWidget {
+//   const IntlPhoneFieldCustom({
+//     super.key,
+//     this.controller,
+//     this.onChanged,
+//     this.onSubmitted,
+//     this.errorText,
+//   });
+//   final TextEditingController? controller;
+//   final void Function(PhoneNumber phone)? onChanged;
+//   final void Function(String)? onSubmitted;
+//   final String? errorText;
+//   @override
+//   Widget build(BuildContext context) {
+//     return IntlPhoneField(
+//       keyboardType: TextInputType.phone,
+//       showCountryFlag: true,
+//       controller: controller,
+//       inputFormatters: [
+//         FilteringTextInputFormatter.allow(RegExp(r'[0-9+]')),
+//         NoSpaceFormatter(),
+//       ],
+//       dropdownDecoration: const BoxDecoration(
+//         color: Colors.transparent,
+//       ),
+//       textAlign: TextAlign.right,
+//       pickerDialogStyle: PickerDialogStyle(
+//         backgroundColor: Colors.white,
+//       ),
+//       decoration: InputDecoration(
+//         errorText: errorText,
+//         labelText: 'Phone'.tr(context),
+//         border: const OutlineInputBorder(
+//           borderSide: BorderSide(width: 1),
+//         ),
+//       ),
+//       initialCountryCode: 'YE',
+//       onTap: () {
+//         print('object');
+//       },
+//       onChanged: onChanged,
+//       onSubmitted: onSubmitted,
+//     );
+//   }
+// }

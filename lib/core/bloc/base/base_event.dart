@@ -1,0 +1,11 @@
+part of 'base_bloc.dart';
+
+@immutable
+abstract class BaseEvent {}
+
+class SetStateBaseBlocEvent extends BaseEvent {}
+
+class ChangeScreenEvent extends BaseEvent {
+  final int current;
+  ChangeScreenEvent({required this.current});
+}
