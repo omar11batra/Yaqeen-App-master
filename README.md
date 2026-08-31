@@ -1,12 +1,10 @@
 <div align="center">
 
-# 📖 تطبيق يقين – الموسوعة الدينية
-### Yaqeen App – Islamic Comprehensive Encyclopedia
+# 📖 Yaqeen App – Islamic Comprehensive Encyclopedia
+### تطبيق يقين – الموسوعة الدينية الشاملة
 
 <p align="center">
-  <b>دليلك الشامل للقرآن الكريم، الأذكار، مواقيت الصلاة والعبادات اليومية</b>
-  <br />
-  <i>Your comprehensive guide for the Holy Qur'an, Athkar, Prayer Times, and Daily Worship.</i>
+  <b>Your comprehensive, modern guide for the Holy Qur'an, Athkar, Prayer Times, Qibla, and Daily Worship.</b>
 </p>
 
 [![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](https://flutter.dev)
@@ -20,25 +18,25 @@
 
 ---
 
-## 📱 لقطات من التطبيق (Screenshots)
+## 📱 Screenshots
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="33%">
-        <img src="./screenshots/1.jpg" alt="Screen 1" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
+        <img src="./screenshots/1.jpg" alt="Home Screen & Prayer Times" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
         <br />
-        <b>الواجهة الرئيسية & مواقيت الصلاة</b>
+        <b>Home & Prayer Times</b>
       </td>
       <td align="center" width="33%">
-        <img src="./screenshots/2.jpg" alt="Screen 2" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
+        <img src="./screenshots/2.jpg" alt="Holy Quran & Recitations" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
         <br />
-        <b>المصحف الشريف والتلاوات</b>
+        <b>Holy Qur'an & Audio</b>
       </td>
       <td align="center" width="33%">
-        <img src="./screenshots/3.jpg" alt="Screen 3" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
+        <img src="./screenshots/3.jpg" alt="Athkar, Duas & Library" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" />
         <br />
-        <b>الأذكار، الأدعية، والمكتبة</b>
+        <b>Athkar & Islamic Library</b>
       </td>
     </tr>
   </table>
@@ -46,102 +44,103 @@
 
 ---
 
-## ✨ المميزات الرئيسية (Main Features)
+## ✨ Key Features
 
-- 📖 **قراءة القرآن الكريم:** بالرسم العثماني المعتمد، مع علامات الوقف، التجويد، والتحكم بحجم الخط ووضع القراءة الليلي.
-- 🎧 **الاستماع الصوتي:** تلاوات بأصوات نخبة من مشاهير القرّاء مع إمكانية التنزيل للاستماع دون اتصال بالإنترنت.
-- ⏰ **مواقيت الصلاة والأذان:** حساب فلكي دقيق حسب موقع المستخدم الجغرافي، مع تنبيهات الأذان والعد التنازلي للصلاة القادمة.
-- 🕋 **بوصلة القبلة:** تحديد اتجاه القبلة بدقة عالية مع عرض المسافة إلى الكعبة المشرفة.
-- 📿 **حصن المسلم والأذكار:** موسوعة شاملة لأذكار الصباح والمساء وبعد الصلاة ومسبحة إلكترونية متطورة.
-- 🔍 **البحث الذكي في القرآن:** محرك بحث سريع ودقيق يدعم البحث بالتشكيل وبدون تشكيل.
-- 🔖 **العلامات المرجعية:** حفظ مواضع القراءة والرجوع إليها بسهولة.
-- ✨ **أسماء الله الحسنى:** استعراض أسماء الله الحسنى مع شرح معانيها وفضائلها.
-- 📚 **المكتبة الإسلامية:** كتب ومراجع إسلامية متكاملة قابلة للتصفح والقراءة.
-- 🌓 **دعم الوضع الليلي والنهاري (Dark / Light Mode):** واجهة عصرية ومريحة للعين.
-- 📱 **العمل بدون إنترنت (Offline Mode):** تخزين محلي ذكي لقواعد البيانات والصوتيات.
+- 📖 **Holy Qur'an Reading:** Authentic Uthmanic script with stop signs, Tajweed rules, customizable font sizing, and dedicated reading modes.
+- 🎧 **Audio Recitations:** High-quality recitations by renowned international Qaris with offline downloading capabilities.
+- ⏰ **Prayer Times & Athan:** Precise astronomical prayer time calculation based on GPS location with customizable Athan notifications and next-prayer countdown.
+- 🕋 **Qibla Compass:** Accurate real-time Qibla direction finder with distance calculation to the Holy Kaaba.
+- 📿 **Hisn Al-Muslim & Athkar:** Comprehensive collection of morning, evening, and post-prayer Athkar alongside a smart digital Tasbeeh counter.
+- 🔍 **Smart Search:** Lightning-fast Qur'anic search engine supporting searches with and without Arabic diacritics (Tashkeel).
+- 🔖 **Bookmarks & Favorites:** Save your reading progress, favorite Surahs, and Ayahs for instant access.
+- ✨ **99 Names of Allah (Asma-ul-Husna):** Interactive exploration of the 99 Names of Allah with meanings and spiritual benefits.
+- 📚 **Islamic Library:** Rich repository of Islamic books, Hadiths, and references ready for reading.
+- 🌓 **Dark & Light Modes:** Elegant, modern themes crafted for optimal reading comfort.
+- 📱 **Offline Functionality:** Smart local caching (SQLite & SharedPreferences) for seamless offline access.
 
 ---
 
-## 🛠️ البنية التقنية (Tech Stack & Architecture)
+## 🛠️ Tech Stack & Architecture
 
 - **Framework:** [Flutter](https://flutter.dev) (Dart SDK `^3.6.0`)
 - **Architecture:** Clean Architecture (Presentation, Domain, Data Layers)
 - **State Management:** [Flutter BLoC](https://pub.dev/packages/flutter_bloc) & RxDart
 - **Local Database:** [SQLite (sqflite)](https://pub.dev/packages/sqflite) & SharedPreferences
-- **Networking & API:** [Dio](https://pub.dev/packages/dio) & REST APIs
-- **Audio & Media:** [just_audio](https://pub.dev/packages/just_audio), [audio_video_progress_bar](https://pub.dev/packages/audio_video_progress_bar)
-- **Location & Prayer Times:** [Geolocator](https://pub.dev/packages/geolocator), [Adhan](https://pub.dev/packages/adhan), [Flutter Qiblah](https://pub.dev/packages/flutter_qiblah)
+- **Networking & API:** [Dio](https://pub.dev/packages/dio) & RESTful Services
+- **Audio Engine:** [just_audio](https://pub.dev/packages/just_audio), [audio_video_progress_bar](https://pub.dev/packages/audio_video_progress_bar)
+- **Location & Calculations:** [Geolocator](https://pub.dev/packages/geolocator), [Adhan](https://pub.dev/packages/adhan), [Flutter Qiblah](https://pub.dev/packages/flutter_qiblah)
 - **Dependency Injection:** [GetIt](https://pub.dev/packages/get_it)
-- **UI & Responsiveness:** [flutter_screenutil](https://pub.dev/packages/flutter_screenutil), [flutter_animate](https://pub.dev/packages/flutter_animate)
+- **UI & Animations:** [flutter_screenutil](https://pub.dev/packages/flutter_screenutil), [flutter_animate](https://pub.dev/packages/flutter_animate), [flutter_svg](https://pub.dev/packages/flutter_svg)
 
 ---
 
-## 📂 هيكل المشروع (Project Structure)
+## 📂 Project Structure
 
 ```
 lib/
-├── core/                   # المشتركات، الثيمات، الأدوات والخدمات العامة
-│   ├── components/         # العناصر المشتركة (Widgets)
-│   ├── extensions/         # امتدادات Dart و Flutter
-│   ├── services/           # خدمات الإشعارات، الصوت، وقواعد البيانات
-│   ├── shared/             # الموارد والثوابت (Assets Manager, Constants)
-│   ├── theme/              # إعدادات الألوان والثيم
-│   └── util/               # دوال مساعدة
-└── features/               # الميزات مقسمة وفق Clean Architecture
-    ├── azkar/              # ميزة الأذكار والتسبيح
-    ├── books/              # المكتبة الإسلامية
-    ├── categories/         # تصنيفات المحتوى
-    ├── download/           # إدارة التنزيلات
-    ├── home/               # الواجهة الرئيسية
-    ├── prayer_time/        # مواقيت الصلاة والقبلة
-    ├── quran/              # تصفح وقراءة القرآن
-    ├── quran_audio/        # مشغل الصوت والتلاوات
-    ├── quran_plan/         # خطط الختمة والقراءة
-    └── setting/            # الإعدادات ومعلومات التطبيق
+├── core/                   # Core utilities, base themes, services & shared components
+│   ├── components/         # Reusable UI widgets
+│   ├── extensions/         # Dart & Flutter extensions
+│   ├── services/           # Notifications, Audio, and Database services
+│   ├── shared/             # Assets managers, constants & configs
+│   ├── theme/              # Color palettes, typography & themes
+│   └── util/               # Helper functions
+└── features/               # Feature-first Clean Architecture modules
+    ├── azkar/              # Athkar and Tasbeeh module
+    ├── books/              # Islamic Library & books module
+    ├── categories/         # Content categorization
+    ├── download/           # Media & file download manager
+    ├── home/               # Dashboard & home screen
+    ├── prayer_time/        # Prayer calculation & Qibla compass
+    ├── quran/              # Qur'an browsing & reading engine
+    ├── quran_audio/        # Audio streaming & media player
+    ├── quran_plan/         # Khatmah reading plans
+    └── setting/            # Settings and app information
 ```
 
 ---
 
-## 🚀 تشغيل المشروع محلياً (Getting Started)
+## 🚀 Getting Started
 
-### المتطلبات المسبقة:
-- تثبيت [Flutter SDK](https://flutter.dev/docs/get-started/install) (إصدار 3.6.0 أو أحدث).
-- بيئة تطوير متكاملة مثل [VS Code](https://code.visualstudio.com/) أو [Android Studio](https://developer.android.com/studio).
+### Prerequisites:
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (`3.6.0` or higher).
+- An IDE such as [VS Code](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio).
 
-### خطوات التثبيت:
+### Installation Steps:
 
-1. **استنساخ المستودع (Clone the repo):**
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/quran_app.git
-   cd quran_app
+   git clone https://github.com/omar11batra/Yaqeen-App-master.git
+   cd Yaqeen-App-master
    ```
 
-2. **تحميل الحزم والاعتماديات (Get dependencies):**
+2. **Install dependencies:**
    ```bash
    flutter pub get
    ```
 
-3. **توليد الملفات اللازمة (Build runner):**
+3. **Generate required code (Build Runner):**
    ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
 
-4. **تشغيل التطبيق (Run the app):**
+4. **Run the application:**
    ```bash
    flutter run
    ```
 
 ---
 
-## 👨‍💻 المطور (Developer)
+## 👨‍💻 Author & Developer
 
-تم تطوير وتصميم هذا التطبيق بواسطة:
-**المهندس عمر عبدالعزيز البتراء** *(Eng. Omar Abdulaziz Al-Batra)*
+Developed and designed by:
+**Eng. Omar Abdulaziz Al-Batra** *(المهندس عمر عبدالعزيز البتراء)*
 
+- 🌐 **GitHub:** [@omar11batra](https://github.com/omar11batra)
 - 🌐 **Facebook:** [omar11batra](https://facebook.com/omar11batra)
 
 ---
 
-## 📄 الترخيص (License)
+## 📄 License
 
-هذا المشروع متاح تحت رخصة [MIT License](LICENSE) - يمكنك استخدامه وتطويره للأغراض الشخصية والدعوية.
+This project is licensed under the [MIT License](LICENSE) - feel free to use and adapt it for personal and educational purposes.
